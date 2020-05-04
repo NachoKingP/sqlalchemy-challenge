@@ -118,7 +118,7 @@ def start_end(start=None, end=None):
     """Return a JSON list of the minimum temperature, the average temperature, and the max temperature for a given date range."""
     
     #Pull data from engine for dates range specified
-    range_data = session.query(Measurement.date, func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).filter(Measurement.date >= start).group_by(Measurement.date).all()
+    range_data = session.query(Measurement.date, func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)).filter(Measurement.date >= start).filter(Measurement.date <= end).group_by(Measurement.date).all()
     
     #Convert data into list for returning
     range_list=list(range_data)
